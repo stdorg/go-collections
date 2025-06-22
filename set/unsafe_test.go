@@ -8,7 +8,7 @@ import (
 
 // TestConcurrentUnsafe_AddRemove ensures `Add` and `Remove` operations work properly in a non current manner.
 func TestConcurrentUnsafe_AddRemove(t *testing.T) {
-	set := set.NewConcurrentUnsafe[int]()
+	set := set.NewUnsafe[int]()
 
 	// Add elements to the set:
 	for i := 0; i < routines; i++ {
@@ -28,7 +28,7 @@ func TestConcurrentUnsafe_AddRemove(t *testing.T) {
 
 // TestConcurrentUnsafe_Contains ensures `Contains` operations work properly in a non current manner.
 func TestConcurrentUnsafe_Contains(t *testing.T) {
-	set := set.NewConcurrentUnsafe[int]()
+	set := set.NewUnsafe[int]()
 
 	// Add elements to the set:
 	for i := 0; i < 1000; i++ {
@@ -45,7 +45,7 @@ func TestConcurrentUnsafe_Contains(t *testing.T) {
 
 // TestConcurrentUnsafe_AddRemoveContains tests a mix of operations in a non current manner.
 func TestConcurrentUnsafe_AddRemoveContains(t *testing.T) {
-	set := set.NewConcurrentUnsafe[int]()
+	set := set.NewUnsafe[int]()
 
 	// Add elements:
 	for i := 0; i < routines; i++ {

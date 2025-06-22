@@ -11,7 +11,7 @@ const routines = 750
 
 // TestConcurrentSafe_AddRemove ensures concurrent access to `Add` and `Remove` operations.
 func TestConcurrentSafe_AddRemove(t *testing.T) {
-	set := set.NewConcurrentSafe[int]()
+	set := set.NewSafe[int]()
 
 	var wg sync.WaitGroup
 
@@ -47,7 +47,7 @@ func TestConcurrentSafe_AddRemove(t *testing.T) {
 
 // TestConcurrentSafe_Contains ensures `Contains` works with concurrent operations.
 func TestConcurrentSafe_Contains(t *testing.T) {
-	set := set.NewConcurrentSafe[int]()
+	set := set.NewSafe[int]()
 
 	// Add elements to the set:
 	for i := 0; i < 1000; i++ {
@@ -74,7 +74,7 @@ func TestConcurrentSafe_Contains(t *testing.T) {
 
 // TestConcurrentSafe_AddRemoveContains tests a mix of operations concurrently.
 func TestConcurrentSafe_AddRemoveContains(t *testing.T) {
-	set := set.NewConcurrentSafe[int]()
+	set := set.NewSafe[int]()
 
 	var wg sync.WaitGroup
 

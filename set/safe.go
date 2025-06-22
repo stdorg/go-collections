@@ -7,7 +7,7 @@ type concurrentSafe[E comparable] struct {
 	mutex  sync.RWMutex
 }
 
-func NewConcurrentSafe[E comparable]() Set[E] {
+func NewSafe[E comparable]() Set[E] {
 	return &concurrentSafe[E]{
 		unsafe: concurrentUnsafe[E]{
 			table: make(map[E]struct{}),

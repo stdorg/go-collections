@@ -4,7 +4,7 @@ type concurrentUnsafe[E comparable] struct {
 	table map[E]struct{}
 }
 
-func NewConcurrentUnsafe[E comparable]() Set[E] {
+func NewUnsafe[E comparable]() Set[E] {
 	return &concurrentUnsafe[E]{
 		table: make(map[E]struct{}),
 	}
