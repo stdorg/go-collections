@@ -2,11 +2,13 @@ package set
 
 import "sync"
 
+// concurrentSafe is a thread-safe set implementation.
 type concurrentSafe[E comparable] struct {
 	unsafe concurrentUnsafe[E]
 	mutex  sync.RWMutex
 }
 
+// NewSafe creates a new thread-safe set.
 func NewSafe[E comparable]() Set[E] {
 	return &concurrentSafe[E]{
 		unsafe: concurrentUnsafe[E]{
@@ -15,58 +17,64 @@ func NewSafe[E comparable]() Set[E] {
 	}
 }
 
-func (set *concurrentSafe[E]) Add(e ...E) {
-	set.mutex.Lock()
+// Add adds the specified elements to the set.
+func (s *concurrentSafe[E]) Add(e ...E) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
 
-	defer set.mutex.Unlock()
-
-	set.unsafe.Add(e...)
+	s.unsafe.Add(e...)
 }
 
-func (set *concurrentSafe[E]) Remove(e ...E) {
-	set.mutex.Lock()
+// Remove removes the specified elements from the set.
+func (s *concurrentSafe[E]) Remove(e ...E) {
+	s.mutex.Lock()
 
-	defer set.mutex.Unlock()
+	defer s.mutex.Unlock()
 
-	set.unsafe.Remove(e...)
+	s.unsafe.Remove(e...)
 }
 
-func (set *concurrentSafe[E]) Clear() {
-	set.mutex.Lock()
+// Clear removes all elements from the set.
+func (s *concurrentSafe[E]) Clear() {
+	s.mutex.Lock()
 
-	defer set.mutex.Unlock()
+	defer s.mutex.Unlock()
 
-	set.unsafe.Clear()
+	s.unsafe.Clear()
 }
 
-func (set *concurrentSafe[E]) Contains(e E) bool {
-	set.mutex.RLock()
+// Contains checks if the set contains the specified element.
+func (s *concurrentSafe[E]) Contains(e E) bool {
+	s.mutex.RLock()
 
-	defer set.mutex.RUnlock()
+	defer s.mutex.RUnlock()
 
-	return set.unsafe.Contains(e)
+	return s.unsafe.Contains(e)
 }
 
-func (set *concurrentSafe[E]) Len() int {
-	set.mutex.RLock()
+// Len returns the number of elements in the set.
+func (s *concurrentSafe[E]) Len() int {
+	s.mutex.RLock()
 
-	defer set.mutex.RUnlock()
+	defer s.mutex.RUnlock()
 
-	return set.unsafe.Len()
+	return s.unsafe.Len()
 }
 
-func (set *concurrentSafe[E]) Chan() <-chan E {
-	set.mutex.RLock()
+// Chan returns a channel to iterate over the elements in the set.
+func (s *concurrentSafe[T]) Chan() <-chan T {
+	s.mutex.RLock()
 
-	defer set.mutex.RUnlock()
+	defer s.mutex.RUnlock()
 
-	return set.unsafe.Chan()
+	return s.unsafe.Chan()
 }
 
-func (set *concurrentSafe[E]) Slice() []E {
-	set.mutex.RLock()
+// Slice returns a slice with the elements in the set.
+func (s *concurrentSafe[E]) Slice() []E {
+	s.mutex.RLock()
 
-	defer set.mutex.RUnlock()
+	defer s.mutex.RUnlock()
 
-	return set.unsafe.Slice()
+	return s.unsafe.Slice()
 }
