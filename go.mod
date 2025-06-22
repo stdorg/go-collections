@@ -1,3 +1,3 @@
-module github.com/othon-hugo/collections.go
+module github.com/stdorg/go-collections
 
 go 1.22.3

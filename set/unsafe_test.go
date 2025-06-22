@@ -3,7 +3,7 @@ package set_test
 import (
 	"testing"
 
-	"github.com/othon-hugo/collections.go/set"
+	"github.com/stdorg/go-collections/set"
 )
 
 // TestConcurrentUnsafe_AddRemove ensures `Add` and `Remove` operations work properly in a non current manner.

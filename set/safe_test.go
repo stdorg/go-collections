@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/othon-hugo/collections.go/set"
+	"github.com/stdorg/go-collections/set"
 )
 
 const routines = 750
