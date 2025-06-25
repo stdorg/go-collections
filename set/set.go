@@ -2,24 +2,23 @@ package set
 
 // Set is a generic set interface for comparable elements.
 type Set[T comparable] interface {
-	// Add adds the specified elements to this set if they are not already present.
-	Add(e ...T)
+	// Add adds the specified element to this set if it is not already present.
+	// Returns true if the element was added (i.e., it was not already in the set).
+	Add(element T) bool
 
-	// Remove removes the specified elements from this set if they are present.
-	Remove(e ...T)
-
-	// Clear removes all elements from this set.
-	Clear()
+	// Remove removes the specified element from this set if it is present.
+	// Returns true if the element was removed (i.e., it was in the set).
+	Remove(element T) bool
 
 	// Contains checks whether this set contains the specified element.
-	Contains(e T) bool
+	Contains(element T) bool
 
 	// Len returns the number of elements in this set.
 	Len() int
 
-	// Chan returns a channel to iterate over the elements in this set.
-	Chan() <-chan T
+	// Clear removes all elements from this set.
+	Clear()
 
-	// Slice returns a slice with the elements in this set.
+	// Slice returns a new slice containing all elements of the set.
 	Slice() []T
 }
