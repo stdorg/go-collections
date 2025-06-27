@@ -1,0 +1,65 @@
+# Binaries for Go programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of the Go coverage tool
+*.out
+*.coverprofile
+*.cov
+
+# Go build artifacts
+/build/
+/bin/
+/dist/
+
+# Go module and workspace files (only ignore local workspace files)
+go.work
+go.work.sum
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.log
+
+# Dependency directories (if vendoring)
+vendor/
+
+# Protobuf generated files
+*.pb.go
+*.pb.gw.go        # gRPC-Gateway
+*.swagger.json    # Swagger files
+*.pb.validate.go  # protoc-gen-validate
+*.pb.meta         # Custom metadata output
+
+# Generated gRPC files
+*_grpc.pb.go
+
+# Protoc cache (e.g., buf)
+.buf
+.bufbuild/
+
+# gopls language server cache
+.gopls/
+
+# Logs and profiling data
+pprof/
+*.pprof
+*.trace
+
+# Test result files
+*.testresult
+*.tmp.test
+
+# Local dev tools
+.env
+.env.*
+.local
